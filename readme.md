@@ -9,9 +9,6 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 *   **Frontend:** HTML, CSS, JavaScript
 *   **Backend:** Node.js com Express
 *   **Banco de Dados:** Arquivo JSON (simples armazenamento de dados)
-*   **Frontend:** HTML, CSS, JavaScript
-*   **Backend:** Node.js com Express
-*   **Banco de Dados:** Arquivo JSON (simples armazenamento de dados)
 *   **Outras Bibliotecas:** Cors
 
 ## Como Rodar a Aplicação Localmente
