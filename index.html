@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>CRUD de Produtos</h1>
+    </header>
+
+    <main>
+        <section id="addProductSection">
+            <h2>Adicionar Produto</h2>
+            <input type="text" id="addName" placeholder="Nome">
+            <input type="text" id="addCategory" placeholder="Categoria">
+            <input type="number" id="addQuantity" placeholder="Quantidade">
+            <input type="number" id="addPrice" placeholder="Preço">
+            <button onclick="addNewProduct()">Adicionar</button>
+        </section>
+
+        <section id="updateProductSection">
+            <h2>Atualizar Produto</h2>
+            <input type="text" id="updateId" placeholder="ID do Produto">
+            <input type="text" id="updateName" placeholder="Novo Nome">
+            <input type="text" id="updateCategory" placeholder="Nova Categoria">
+            <input type="number" id="updateQuantity" placeholder="Nova Quantidade">
+            <input type="number" id="updatePrice" placeholder="Novo Preço">
+            <button onclick="updateProduct()">Atualizar</button>
+        </section>
+
+        <section id="deleteProductSection">
+            <h2>Deletar Produto</h2>
+            <input type="text" id="deleteId" placeholder="ID do Produto">
+            <button onclick="deleteProduct()">Deletar</button>
+        </section>
+
+        <section id="inventorySection">
+            <h2>Inventário</h2>
+            <button onclick="listProducts()">Listar Produtos</button>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os dados da tabela serão inseridos aqui pelo JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CRUD AgilStore</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Este script garante que o inventário seja carregado assim que a página é carregada.
+        document.addEventListener('DOMContentLoaded', (event) => {
+            loadInventory();
+        });
+    </script>
+</body>
+</html>
