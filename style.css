@@ -3,28 +3,32 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+    min-height: 100vh;
+    /* Ensure the body takes up at least the full viewport height */
     display: flex;
     flex-direction: column;
     color: #333;
 }
 
-header, footer {
+header,
+footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 1em 0;
 
 }
-footer{
+
+footer {
     font-size: 1.5rem;
 }
 
 main {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza as seções horizontalmente */
-    padding: 20px;  
+    align-items: center;
+    /* Centraliza as seções horizontalmente */
+    padding: 20px;
 }
 
 
@@ -33,9 +37,11 @@ section {
     padding: 15px;
     background-color: #fff;
     border-radius: 0.8rem;
-    width: 60%; /* Define uma largura para a seção */
+    width: 60%;
+    /* Define uma largura para a seção */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; /* Adiciona margem automática para centralizar */
+    margin: 20px auto;
+    /* Adiciona margem automática para centralizar */
     font-size: 1.5rem;
 
     text-align: center;
@@ -47,7 +53,8 @@ table {
     margin-top: 20px;
 }
 
-th, td {
+th,
+td {
     text-align: center;
     padding: 8px 12px;
     text-align: left;
@@ -64,12 +71,14 @@ section input {
     margin: 5px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box; /* Garante que o padding não aumenta o tamanho total do elemento */
+    box-sizing: border-box;
+    /* Garante que o padding não aumenta o tamanho total do elemento */
 }
 
 section button {
     display: block;
-    margin: 10px auto; /* Centraliza o botão horizontalmente */
+    margin: 10px auto;
+    /* Centraliza o botão horizontalmente */
 }
 
 button {
@@ -79,30 +88,45 @@ button {
     border: 0.1rem;
     cursor: pointer;
 }
+
 nav {
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente, se necessário */
-    padding: 10px; /* Adiciona um pouco de espaço ao redor dos links */
-    background-color: #f0f0f0; /* Cor de fundo para o menu */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente, se necessário */
+    padding: 10px;
+    /* Adiciona um pouco de espaço ao redor dos links */
+    background-color: #f0f0f0;
+    /* Cor de fundo para o menu */
 }
 
 nav a {
-    margin: 0 15px; /* Espaçamento entre os links */
-    font-size: 1.2em; /* Tamanho da fonte */
-    color: #333; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado padrão */
-    padding: 8px 12px; /* Espaçamento interno para melhor aparência */
-    border-radius: 5px; /* Bordas arredondadas */
-    background-color: #ddd; /* Cor de fundo dos links */
+    margin: 0 15px;
+    /* Espaçamento entre os links */
+    font-size: 1.2em;
+    /* Tamanho da fonte */
+    color: #333;
+    /* Cor do texto */
+    text-decoration: none;
+    /* Remove o sublinhado padrão */
+    padding: 8px 12px;
+    /* Espaçamento interno para melhor aparência */
+    border-radius: 5px;
+    /* Bordas arredondadas */
+    background-color: #ddd;
+    /* Cor de fundo dos links */
 }
+
 footer {
-    margin-top: auto; /* Push the footer to the bottom */
+    margin-top: auto;
+    /* Push the footer to the bottom */
 }
 
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* Espaçamento entre os botões */
+    gap: 10px;
+    /* Espaçamento entre os botões */
 }

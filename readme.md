@@ -21,4 +21,4 @@ Este projeto foi construído utilizando as seguintes tecnologias:
     `npm install`
 4.  **Inicie o servidor backend:**
     `npm start`
-5.  **Abra o `index.html` no seu navegador.**
+5.  **Utilize o Live Server para rodar a aplicação e abra o `index.html` no seu navegador através do Live Server.**

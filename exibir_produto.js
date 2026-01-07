@@ -5,8 +5,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     await loadInventory();
 
-
-
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
 
@@ -45,8 +43,25 @@ async function displayProductDetails(query) {
                 <td>${product.id}</td>
                 <td>${product.name}</td>
                 <td>${product.category}</td>
-                <td>${product.quantity}</td>
-                <td>${product.price}</td>
+                <td>${product.quantity}</td> 
+                <td>${product.price.toLocaleString(
+                "pt-BR",
+                { style: "currency", currency: "BRL" },
+            )}
+                </td>
+                <td style="display: flex; justify-content: center; align-items: center;">
+                    <button 
+                        onclick="location.href = 'atualiza-produto.html?id=${product.id}'"
+                        style="margin-right: 5px;"
+                    >
+                        Atualizar
+                    </button>
+                    <button 
+                        onclick="deleteProductFromList('${product.id}')"
+                    >
+                        Remover
+                    </button>
+                </td>
             `;
 
             tbody.appendChild(row);

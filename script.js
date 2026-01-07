@@ -1,9 +1,7 @@
-
 /**
  * @file script.js
  * @description Este arquivo contém as funções JavaScript para o aplicativo CRUD de inventário.
  */
-
 const API_ENDPOINT = 'http://localhost:3000/inventory'; // Define o endpoint da API para o inventário
 let inventory = []; // Inicializa o inventário como um array vazio
 
@@ -12,12 +10,6 @@ let inventory = []; // Inicializa o inventário como um array vazio
  * @async
  * @function
  */
-
-/**
- * Função assíncrona para carregar o inventário do servidor.
- * @async
- */
-
 async function loadInventory() {
     try {
         const response = await fetch(API_ENDPOINT); // Faz a requisição para a API
@@ -64,23 +56,19 @@ function addProduct(name, category, quantity, price) {
         category: category,
         quantity: quantity,
         price: price,
-    };    
-
+    };
     // Adiciona o produto ao array de inventário
     inventory.push(product);
-
     // Atualiza a tabela e salva no servidor
     renderTable();
     saveInventory();
-    
 }
-
 /**
  * Gera um ID único aleatório.
  * @returns {string} O ID único gerado.
  */
 function generateId() {
-  return Math.random().toString(36).substring(2, 15); // Gera um ID aleatório
+    return Math.random().toString(36).substring(2, 15); // Gera um ID aleatório
 }
 
 /**
@@ -91,25 +79,39 @@ function generateId() {
  * @returns {void}
  */
 function addNewProduct() {
-
-    // Obtém os valores dos campos de entrada do formulário    
     const name = document.getElementById('addName').value;
     const category = document.getElementById('addCategory').value;
-    const quantity = parseFloat(document.getElementById('addQuantity').value);
+    const quantity = document.getElementById('addQuantity').value;
     const price = parseFloat(document.getElementById('addPrice').value);
 
+    // Verifica se quantidade é um inteiro
+    if (!/^\d+$/.test(quantity)) {
+        alert("Por favor, insira um número inteiro para a quantidade.");
+        return;
+    }
     // Verifica se os campos estão preenchidos e se os valores numéricos são válidos
+    const quantityNum = Number(quantity)
+
+    if (quantityNum <= 0) {
+        alert("Por favor, insira uma quantidade maior que zero.");
+
+        return;
+    }
+    if (price <= 0) {
+        alert("Por favor, insira um valor maior que zero");
+        return;
+    }
     if (name && category && !isNaN(quantity) && !isNaN(price)) {
-         addProduct(name, category, quantity, price); // Adiciona o produto ao inventário
+        addProduct(name, category, quantity, price);
         document.getElementById('addName').value = '';
         document.getElementById('addCategory').value = '';
         document.getElementById('addQuantity').value = '';
+
         // Limpa os campos de entrada
         document.getElementById('addPrice').value = '';
 
-        window.location.href = "listar.html";
+        window.location.href = "index.html";
         alert("Produto adicionado com sucesso!");
-        
     } else {
         alert("Por favor, insira dados válidos para o produto.");
     }
@@ -118,22 +120,22 @@ function addNewProduct() {
 /**
  * Função para listar os produtos na tabela.
  * Obtém o elemento tbody da tabela, limpa-o e adiciona os produtos do inventário.
- */// Função para listar os produtos na tabela
+ */
 function listProducts() {
-    
-    // Obtém o elemento tbody da tabela
+
     let inventoryTable = document.getElementById('inventoryTable');
 
     const tableBody = inventoryTable ? inventoryTable.querySelector('tbody') : null;
     if (!tableBody) {
         return;
     }
-    
-    // Limpa o conteúdo da tabela antes de adicionar os produtos
+    if (inventory.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Nenhum produto Cadastrado ainda.Vá em <a href="adicionar_produto.html">Adicionar Produto</a> para começar</td></tr>';
+        return;
+    }
     tableBody.innerHTML = '';
-    
-    inventory.forEach((product) => {
 
+    inventory.forEach((product) => {
 
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -141,8 +143,12 @@ function listProducts() {
             <td>${product.name}</td>
             <td>${product.category}</td>
             <td>${product.quantity}</td>
-            <td>${product.price}</td>
-            <td><button onclick="location.href = 'atualiza_produto.html?id=' + this.parentNode.parentNode.cells[0].innerText">Atualizar</button>
+            <td>${product.price.toLocaleString(
+            "pt-BR",
+            { style: "currency", currency: "BRL" },
+        )}
+            </td>
+            <td><button onclick="location.href = 'atualiza-produto.html?id=' + this.parentNode.parentNode.cells[0].innerText">Atualizar</button>
             <td><button onclick="deleteProductFromList('${product.id}')">Remover</button></td>
         `;
 
@@ -150,14 +156,11 @@ function listProducts() {
     });
 }
 
-
-// Função para limpar a tabela de inventário
-function clearTable() {
 /**
  * Função para limpar a tabela de inventário.
  * Obtém o elemento da tabela e limpa o seu conteúdo.
  */
-    // Obtém o elemento da tabela
+function clearTable() {
     let table = document.getElementById('inventoryTable');
     if (table) {
         // Obtém o elemento tbody da tabela
@@ -167,7 +170,6 @@ function clearTable() {
     }
 }
 
-// Função para remover um produto da lista
 /**
  * Função para remover um produto da lista.
  * Encontra o índice do produto no array de inventário, remove-o, salva o inventário atualizado e renderiza a tabela.
@@ -175,9 +177,7 @@ function clearTable() {
  * @returns {void}
  */
 function deleteProductFromList(productId) {
-    // Encontra o índice do produto no array de inventário
     const productIndex = inventory.findIndex((product) => product.id === productId);
-
     // Se o produto não for encontrado, exibe um alerta
     if (productIndex === -1) {
         alert("Produto não encontrado.");
@@ -185,14 +185,9 @@ function deleteProductFromList(productId) {
     }
     // Remove o produto do array de inventário
     inventory.splice(productIndex, 1);
-
-    // Salva o inventário atualizado e renderiza a tabela
     saveInventory();
     renderTable();
-
 }
-
-
 
 /**
  * Função para renderizar a tabela.
@@ -200,28 +195,22 @@ function deleteProductFromList(productId) {
  * @returns {void}
  */
 function renderTable() {
-    // Obtém o elemento da tabela
     clearTable()
     let table = document.querySelector('table');
     listProducts()
 }
-
-// Função para atualizar um produto existente no inventário
-function updateProduct() {    
 /**
- * Função para atualizar um produto existente no inventário.
- * Obtém os valores dos campos de entrada do formulário, encontra o produto no inventário, atualiza os seus dados,
- * salva o inventário atualizado e renderiza a tabela.
- * @returns {void}
- */
-    // Obtém os valores dos campos de entrada do formulário
-    const id = document.getElementById('updateId').value;    
+     * Função para atualizar um produto existente no inventário.
+     * Obtém os valores dos campos de entrada do formulário, encontra o produto no inventário, atualiza os seus dados,
+     * salva o inventário atualizado e renderiza a tabela.
+     * @returns {void}
+     */
+function updateProduct() {
+    const id = document.getElementById('updateId').value;
     const name = document.getElementById('updateName').value;
     const category = document.getElementById('updateCategory').value;
-    const quantity = document.getElementById('updateQuantity').value;    
+    const quantity = document.getElementById('updateQuantity').value;
     const price = document.getElementById('updatePrice').value;
-
-    // Encontra o índice do produto no array de inventário
     const productIndex = inventory.findIndex((product) => product.id === id);
 
     // Se o produto não for encontrado, exibe um alerta
@@ -232,88 +221,20 @@ function updateProduct() {
 
     // Atualiza o produto apenas se os campos estiverem preenchidos
     if (name) inventory[productIndex].name = name;
-    if (category) inventory[productIndex].category = category;    
-    if (quantity) inventory[productIndex].quantity = parseFloat(quantity);    
+    if (category) inventory[productIndex].category = category;
+    if (quantity) inventory[productIndex].quantity = parseInt(quantity);
     if (price) inventory[productIndex].price = parseFloat(price);
-    
+
     // Salva o inventário atualizado e renderiza a tabela
     saveInventory();
     renderTable();
     alert("Produto atualizado com sucesso!");
 }
-
-// Função para deletar um produto do inventário
-/**
- * Função para deletar um produto do inventário.
- * Obtém o ID do produto a ser deletado, encontra o produto no inventário, remove-o, salva o inventário atualizado e renderiza a tabela.
- * @returns {void}
- */
-function deleteProduct() {
-
-    // Obtém o ID do produto a ser deletado
-    const id = document.getElementById('deleteId').value;    
-
-    // Encontra o índice do produto no array de inventário
-    const productIndex = inventory.findIndex((product) => product.id === id);    
-
-    // Se o produto não for encontrado, exibe um alerta
-    if (productIndex === -1) {        
-        alert("Produto não encontrado.");
-        return;
-    }
-    // Remove o produto do array de inventário
-    inventory.splice(productIndex, 1);    
-
-    // Salva o inventário atualizado e renderiza a tabela
-    saveInventory();
-    renderTable();    
-
-}
-
-/**
- * Função para encontrar produtos no inventário.
- * Filtra o inventário com base na query, exibe os resultados no console e redireciona para a página de busca.
- * @param {string} query O ID ou nome do produto a ser buscado.
- */
-// Função para encontrar produtos no inventário
-function findProduct(query) {
-    if (!query) {
-        alert("Por favor, insira um ID ou nome para buscar.");
-        return;
-    }
-
-    // Filtra o inventário com base na query
-    const results = inventory.filter(
-        (product) =>
-        product.id === query || product.name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    let message = "";
-
-    // Exibe os resultados no console
-    if (results.length === 0) {
-        message = "Nenhum produto encontrado.";
-        alert(message);
-        window.location.href = 'buscar.html';        
-    } else {
-        results.forEach(product => {
-            message += `ID: ${product.id}\n`;
-            message += `Nome: ${product.name}\n`;
-            message += `Categoria: ${product.category}\n`;
-            message += `Quantidade: ${product.quantity}\n`;
-            message += `Preço: ${product.price}\n\n`; 
-        });
-    }
-
-    alert(message);
-}
-
 /**
  * Função para remover um produto.
  * Obtém o ID do produto a ser removido, encontra o produto no inventário, remove-o, salva o inventário atualizado e redireciona para a página de listagem.
  * @async
  */
-// Função para remover um produto
 async function removeProduct() {
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
@@ -324,7 +245,7 @@ async function removeProduct() {
         if (productIndex !== -1) {
             inventory.splice(productIndex, 1);
             await saveInventory();
-            window.location.href = 'listar.html';
+            window.location.href = 'index.html';
         } else {
             alert("Produto não encontrado no inventário.");
         }
@@ -333,70 +254,24 @@ async function removeProduct() {
     }
 }
 
-
 /**
  * Função para realizar a busca do produto e redirecionar para a página de exibição.
  * @async
  */
-// Função para realizar a busca do produto e redirecionar para a página de exibição
 async function searchProduct() {
     const query = document.getElementById('findQuery').value;
-
     if (query) {
-        //Check if product exists
+        // Verifica se o produto existe
         const results = inventory.filter(product =>
             product.id === query || product.name.toLowerCase().includes(query.toLowerCase())
         );
 
-        if(results.length > 0){
-            window.location.href = `exibirProduto.html?query=${query}`;
+        if (results.length > 0) {
+            window.location.href = `exibir-produto.html?query=${query}`;
         } else {
             alert("Produto inexistente");
         }
     } else {
         alert("Por favor, insira um ID ou nome para buscar.");
-    }
-}
-
-
-/**
- * Função para exibir os detalhes do produto na página exibirProduto.html.
- * @async
- */
-async function displayProduct() {
-    await loadInventory();
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('query');
-
-    if (query) {
-        // Filtra o inventário com base na query
-
-        if (!inventory || inventory.length === 0) {
-            console.warn("Inventory data is not available.");
-            return;
-        }
-        const results = inventory.filter(
-            (product) =>
-            product.id === query || product.name.toLowerCase().includes(query.toLowerCase())
-        );
-
-        const productTable = document.getElementById('productTable');
-        const tbody = productTable.querySelector('tbody');
-        tbody.innerHTML = '';
-
-        if (results.length > 0) {
-            results.forEach(product => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.category}</td>
-                <td>${product.quantity}</td>
-                <td>${product.price}</td>
-                `;
-                tbody.appendChild(row);
-
-            });
-        }
     }
 }

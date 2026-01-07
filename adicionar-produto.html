@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Inventory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a> | <a href="adicionar-produto.html">Adicionar Produto</a> | <a
+            href="buscar.html">Buscar Produto</a>
+    </nav>
+
+    <body>
+        <header>
+            <h1>AgilStore</h1>
+        </header>
+
+        <main>
+            <section id="addProductSection">
+                <h2>Adicionar Produto</h2>
+                <input type="text" id="addName" placeholder="Nome">
+                <input type="text" id="addCategory" placeholder="Categoria">
+                <input type="number" id="addQuantity" placeholder="Quantidade">
+                <input type="number" id="addPrice" placeholder="Preço">
+                <button onclick="addNewProduct()">Adicionar</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 CRUD AgilStore</p>
+        </footer>
+
+        <script src="script.js"></script>
+        <script>
+            // Este script garante que o inventário seja carregado assim que a página é carregada.
+            document.addEventListener('DOMContentLoaded', (event) => {
+                loadInventory();
+            });
+        </script>
+    </body>
+
+</html>

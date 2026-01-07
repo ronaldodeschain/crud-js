@@ -24,8 +24,6 @@ app.use(express.json());
 // Lida com requisições OPTIONS (preflight) para todas as rotas
 app.options('*', cors(corsOptions));
 
-
-
 // Rota para obter o inventário
 app.get('/inventory', (req, res) => {
     // Lê o conteúdo do arquivo de dados
@@ -67,8 +65,8 @@ app.listen(port, () => {
         fs.writeFileSync(DATA_FILE, '[]');
         console.log(`${DATA_FILE} created`);
     } else {
-    console.log('Starting server with Express and CORS...');
-    // Se o arquivo já existir, exibe uma mensagem indicando que ele existe
+        console.log('Starting server with Express and CORS...');
+        // Se o arquivo já existir, exibe uma mensagem indicando que ele existe
         console.log(`${DATA_FILE} exists`);
     }
 });
