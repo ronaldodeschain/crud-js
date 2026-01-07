@@ -48,6 +48,13 @@ async function updateProductDetails() {
         alert("Por favor, insira um preço maior que zero");
         return;
     }
+    if (productExists(productName)) {
+        const existingProduct = inventory.find(p => p.name.toLowerCase() === productName.toLowerCase());
+        if (!existingProduct || existingProduct.id !== productId) {
+            alert("Já existe um produto com este nome. Por favor, insira um nome diferente.");
+            return;
+        }
+    }
     // Encontra o indice do produto no inventário
     const productIndex = inventory.findIndex(p => p.id === productId);
 

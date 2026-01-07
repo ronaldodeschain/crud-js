@@ -39,6 +39,20 @@ async function saveInventory() {
     }
 }
 
+/**
+ * Função para verificar se um produto com o mesmo nome já existe no inventário.
+ * @param {string} name O nome do produto a ser verificado.
+ * @returns {boolean} True se o produto já existe, false caso contrário.
+ */
+function productExists(name) {
+    const lowerCaseName = name.toLowerCase();
+    return inventory.some(product => {
+        const lowerCaseExistingName = product.name.toLowerCase();
+        return lowerCaseExistingName === lowerCaseName;
+    });
+}
+
+
 
 /**
  * Função para adicionar um novo produto ao array de inventário.
@@ -79,6 +93,12 @@ function generateId() {
  * @returns {void}
  */
 function addNewProduct() {
+
+    //Se produto ja existir no inventário
+    if (productExists(document.getElementById('addName').value)) {
+        alert("Já existe um produto com este nome. Por favor, insira um nome diferente.");
+        return;
+    }
     const name = document.getElementById('addName').value;
     const category = document.getElementById('addCategory').value;
     const quantity = document.getElementById('addQuantity').value;
