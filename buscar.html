@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a> | <a href="buscar.html">Buscar Produto</a> | <a href="listar.html">Listar Produtos</a>
+    </nav>
+    <header>
+        <h1>AgilStore</h1>
+    </header>
+
+    <main>
+        <section id="findProductSection">
+            <h2>Buscar Produto</h2>
+            <input type="text" id="findQuery" placeholder="ID ou Nome do Produto" onkeydown="handleKeyDown(event)">
+            <div id="productForm" style="display:none;">
+                <h2>Detalhes do Produto</h2>
+                <input type="text" id="productId" readonly><br>
+                <input type="text" id="productName"><br>
+                <input type="text" id="productCategory"><br>
+                <input type="number" id="productQuantity"><br>
+                <input type="number" id="productPrice"><br>
+                <button onclick="updateProductDetails()">Atualizar Produto</button>
+            </div>
+            <button onclick="searchProduct()">Buscar</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CRUD AgilStore</p>
+    </footer>
+
+    <script>
+        async function loadInventory() {
+            try {
+                const response = await fetch('http://localhost:3000/inventory'); // Faz a requisição para a API
+                inventory = await response.json(); // Converte a resposta para JSON
+                renderTable(); // Renderiza a tabela com os dados do inventário
+            } catch (error) {
+                console.error("Falha ao carregar o inventário do servidor:", error);
+                inventory = []; // Garante que o inventário seja inicializado em caso de erro
+            }
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            loadInventory();
+        });
+    </script>
+    <script src="script.js"></script>
+    <script>
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                searchProduct();
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -3,6 +3,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+    display: flex;
+    flex-direction: column;
     color: #333;
 }
 
@@ -11,16 +14,19 @@ header, footer {
     color: #fff;
     text-align: center;
     padding: 1em 0;
+
 }
 footer{
     font-size: 1.5rem;
 }
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza as seções horizontalmente */
     padding: 20px;  
 }
+
 
 section {
     margin-bottom: 20px;
@@ -31,6 +37,7 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px auto; /* Adiciona margem automática para centralizar */
     font-size: 1.5rem;
+
     text-align: center;
 }
 
@@ -71,4 +78,31 @@ button {
     color: white;
     border: 0.1rem;
     cursor: pointer;
+}
+nav {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente, se necessário */
+    padding: 10px; /* Adiciona um pouco de espaço ao redor dos links */
+    background-color: #f0f0f0; /* Cor de fundo para o menu */
+}
+
+nav a {
+    margin: 0 15px; /* Espaçamento entre os links */
+    font-size: 1.2em; /* Tamanho da fonte */
+    color: #333; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado padrão */
+    padding: 8px 12px; /* Espaçamento interno para melhor aparência */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: #ddd; /* Cor de fundo dos links */
+}
+footer {
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os botões */
 }

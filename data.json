@@ -1,9 +1,23 @@
 [
   {
-    "id": "dbeq1azfbr8",
-    "name": "Sabonete",
+    "id": "4laztb59gi6",
+    "name": "Sabonete o retorno",
     "category": "higiene",
     "quantity": 2,
-    "price": 2
+    "price": 2.99
+  },
+  {
+    "id": "i99uowcip3",
+    "name": "toblerone",
+    "category": "comida",
+    "quantity": 1,
+    "price": 12
+  },
+  {
+    "id": "awgmx8byoj",
+    "name": "Camisa de força",
+    "category": "Saude",
+    "quantity": 1,
+    "price": 333
   }
 ]

@@ -14,7 +14,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 ## Como Rodar a Aplicação Localmente
 
 1.  **Clone o repositório:**
-    `git clone <URL do seu repositório>`
+    `git clone https://github.com/ronaldodeschain/crud-js.git`
 2.  **Navegue até o diretório do projeto:**
     `cd crud-js`
 3.  **Instale as dependências do backend:**

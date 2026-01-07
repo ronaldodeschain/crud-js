@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exibir Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a> | <a href="buscar.html">Buscar Produto</a> | <a href="listar.html">Listar
+            Produtos</a>
+    </nav>
+
+    <header>
+        <h1>AgilStore</h1>
+    </header>
+
+    <main>
+        <section id="productDetailsSection">
+            <h2>Produto Encontrado</h2>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+        <div class="button-container">
+            <button onclick="location.href = 'atualiza_produto.html?id=' + document.querySelector('#productTable tbody tr:first-child td:first-child').innerText">Atualizar</button>
+            <button onclick="removeProduct()">Remover</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 CRUD AgilStore</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            displayProduct();
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="exibir_produto.js"></script>
+</body>
+
+</html>
